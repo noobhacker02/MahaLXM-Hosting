@@ -1,0 +1,22 @@
+# Robots.txt for Mahalaxmi Group
+# https://themahalaxmigroup.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://themahalaxmigroup.com/sitemap.xml
+
+# Disallow admin/private paths
+Disallow: /api/
+Disallow: /admin/
+Disallow: /config/
+Disallow: /*.php$
+Disallow: /contact-form.php
+
+# Allow all crawlers to index all public pages
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /

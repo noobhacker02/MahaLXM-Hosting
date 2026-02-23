@@ -1130,16 +1130,16 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
 
   // Determine navbar styling based on page and scroll
   const getNavBg = () => {
-    if (scrolled) return 'bg-white shadow-lg py-3';
+    if (scrolled) return 'bg-emerald-950 shadow-lg py-3';
     if (!isHome) return 'bg-emerald-950 shadow-md py-4';
     return 'bg-transparent py-6';
   };
   const getTextColor = () => {
-    if (scrolled) return 'text-emerald-900';
+    if (scrolled) return 'text-white';
     return 'text-white';
   };
   const getLogoTextColor = () => {
-    if (scrolled) return 'text-emerald-950';
+    if (scrolled) return 'text-white';
     return 'text-white';
   };
 
@@ -1221,7 +1221,7 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
             </button>
           )}
           <Button variant="gold" className="hidden md:flex py-3 px-6 text-xs" onClick={() => changeView('contact')}>Quick Inquiry</Button>
-          <button aria-label={isOpen ? 'Close menu' : 'Open menu'} className={`lg:hidden p-2 rounded-lg backdrop-blur-md ${scrolled ? 'text-emerald-950 bg-gray-100' : !isHome ? 'text-white bg-white/20' : 'text-white bg-white/20'}`} onClick={() => setIsOpen(!isOpen)}>
+          <button aria-label={isOpen ? 'Close menu' : 'Open menu'} className={`lg:hidden p-2 rounded-lg backdrop-blur-md ${scrolled ? 'text-white bg-white/20' : !isHome ? 'text-white bg-white/20' : 'text-white bg-white/20'}`} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -1445,9 +1445,9 @@ const AboutView = ({ setView }) => (
         <SectionHeader title="Core Leadership" center={true} />
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            { n: "Mahendra Shah", r: "Chairman", p: "+91 98200 61842" },
-            { n: "Chirag Shah", r: "Managing Director", p: "+91 98210 50005" },
-            { n: "Dhruv Shah", r: "Executive Director", p: "+91 91521 57578" }
+            { n: "Mahendra Shah", r: "Leadership Team", p: "+91 98200 61842" },
+            { n: "Chirag Shah", r: "Leadership Team", p: "+91 98210 50005" },
+            { n: "Dhhruv Shah", r: "Leadership Team", p: "+91 91521 57578" }
           ].map((l, i) => (
             <AnimatedSection key={i} delay={i * 150}>
               <div className="bg-white p-10 rounded-2xl border border-gray-100 text-center card-hover group">

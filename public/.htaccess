@@ -11,6 +11,18 @@
   # Block access to config directory
   RewriteRule ^config/ - [F,L]
 
+  # Block access to admin/admin-config.php (sensitive credentials)
+  RewriteRule ^admin/admin-config\.php$ - [F,L]
+
+  # Allow admin PHP files to execute directly
+  RewriteRule ^admin/.*\.php$ - [L]
+
+  # Allow admin data JSON files (read by frontend)
+  RewriteRule ^admin/data/.*\.json$ - [L]
+
+  # Block all other admin/data access
+  RewriteRule ^admin/data/ - [F,L]
+
   # SPA Fallback (React Router)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

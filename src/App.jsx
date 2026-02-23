@@ -78,6 +78,24 @@ const useFormSubmit = () => {
 };
 
 // ========================================
+// SITE MODE HOOK (ADMIN TOGGLE)
+// ========================================
+const useSiteMode = () => {
+  const [siteMode, setSiteMode] = useState('group_only');
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/admin/data/site-mode.json')
+      .then(res => res.ok ? res.json() : { mode: 'group_only' })
+      .then(data => setSiteMode(data.mode || 'group_only'))
+      .catch(() => setSiteMode('group_only'))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { siteMode, loading };
+};
+
+// ========================================
 // HOOKS & UTILITIES
 // ========================================
 
@@ -309,7 +327,7 @@ const PROJECT_DATA = [
 ];
 
 const DIVISION_DATA = [
-  { id: 'chemicals', view: 'chemicals', name: "Mahalaxmi Chemicals", role: "Construction Chemicals", desc: "Greenseal waterproofing, tile adhesives, and repair mortars. UK Technology transfer.", icon: <FlaskConical size={32} /> },
+  { id: 'chemicals', view: 'chemicals', name: "Mahalaxmi Construction Chemicals", role: "Construction Chemicals", desc: "Greenseal waterproofing, tile adhesives, and repair mortars. UK Technology transfer.", icon: <FlaskConical size={32} /> },
   { id: 'millennium', view: 'millennium', name: "Mahalaxmi Millennium", role: "Mining & Aggregates", desc: "Basalt mining, M-Sand, and aggregate supply for mega-projects (Bullet Train, Expressways).", icon: <HardHat size={32} /> },
   { id: 'shiv', view: 'shiv', name: "Shiv Minerals", role: "Foundry & Glass Sand", desc: "Industrial silica sand processing (20,000 MT/month). Supplying Metso, Mahindra, Tata.", icon: <Microscope size={32} /> },
   { id: 'oem', view: 'oem', name: "Contract Manufacturing", role: "OEM Services", desc: "Private label manufacturing facility for international construction chemical brands.", icon: <Factory size={32} /> },
@@ -987,7 +1005,7 @@ const HeroSlider = ({ setView }) => {
     {
       img: "/images/product-catalogue-cover.webp",
       category: "Construction Chemicals",
-      title: "Mahalaxmi Chemicals",
+      title: "Mahalaxmi Construction Chemicals",
       sub: "Greenseal waterproofing, tile adhesives, and repair mortars. UK Technology transfer.",
       link: 'chemicals'
     },
@@ -1090,7 +1108,7 @@ const SectionHeader = ({ title, subtitle, light = false, center = false }) => (
 // NAVBAR (MEGA MENU)
 // ========================================
 
-const Navbar = ({ view, setView }) => {
+const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeMega, setActiveMega] = useState(null);
@@ -1125,11 +1143,11 @@ const Navbar = ({ view, setView }) => {
     return 'text-white';
   };
 
-  const menu = [
+  const allMenu = [
     { n: 'About', v: 'about', sub: [{ n: 'History', v: 'about' }, { n: 'Leadership', v: 'about' }] },
     {
       n: 'Divisions', v: 'divisions', sub: [
-        { n: 'Chemicals', v: 'chemicals' }, { n: 'OEM Manufacturing', v: 'oem' },
+        { n: 'Construction Chemicals', v: 'chemicals' }, { n: 'OEM Manufacturing', v: 'oem' },
         { n: 'Mahalaxmi Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' },
         { n: 'Transport & Logistics', v: 'transport' }, { n: 'Infrastructure', v: 'infra' }
       ]
@@ -1140,18 +1158,25 @@ const Navbar = ({ view, setView }) => {
     { n: 'Contact', v: 'contact' }
   ];
 
+  // Filter out Chemicals, Projects, and Catalogue in group_only mode
+  const menu = siteMode === 'group_only'
+    ? allMenu.map(item => item.n === 'Divisions'
+      ? { ...item, sub: item.sub.filter(s => s.v !== 'chemicals') }
+      : item).filter(item => !['Projects', 'Catalogue'].includes(item.n))
+    : allMenu;
+
   const megaMenus = {
     'Divisions': {
       img: '/images/oem-manufacturing.webp',
       title: 'Our Business Units', desc: 'Specialized industrial divisions operating with unified quality standards.',
       items: [
-        { n: 'Chemicals', v: 'chemicals', i: <FlaskConical size={16} /> },
+        { n: 'Construction Chemicals', v: 'chemicals', i: <FlaskConical size={16} /> },
         { n: 'OEM Manufacturing', v: 'oem', i: <Factory size={16} /> },
         { n: 'Mahalaxmi Millennium', v: 'millennium', i: <HardHat size={16} /> },
         { n: 'Shiv Minerals', v: 'shiv', i: <Microscope size={16} /> },
         { n: 'Transport & Logistics', v: 'transport', i: <Truck size={16} /> },
         { n: 'Infrastructure', v: 'infra', i: <Building2 size={16} /> }
-      ]
+      ].filter(item => siteMode === 'group_only' ? item.v !== 'chemicals' : true)
     },
     'Catalogue': {
       img: '/images/product-catalogue-cover.webp',
@@ -1168,8 +1193,8 @@ const Navbar = ({ view, setView }) => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-300 ${getNavBg()}`} onMouseLeave={() => setActiveMega(null)}>
       <div className="container mx-auto px-10 md:px-16 flex justify-between items-center relative">
-        <div className="flex items-center gap-4 cursor-pointer group" onClick={() => changeView('home')}>
-          <div className={`${scrolled ? 'bg-emerald-950 text-white' : isHome ? 'bg-emerald-950 text-white' : 'bg-white text-emerald-950'} w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-lg font-bold text-xl md:text-2xl shadow-xl group-hover:scale-105 transition-transform`}>M</div>
+        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => changeView('home')}>
+          <img src="/images/mahalaxmi-group-logo.png" alt="Mahalaxmi Group" className="w-10 h-10 md:w-12 md:h-12 object-contain group-hover:scale-105 transition-transform" />
           <div className="flex flex-col leading-none">
             <span className={`font-bold text-xl md:text-2xl tracking-tight ${getLogoTextColor()} transition-colors`}>MAHALAXMI</span>
             <span className="text-amber-500 font-semibold text-[9px] tracking-[0.3em] uppercase">Group Industrial</span>
@@ -1178,21 +1203,23 @@ const Navbar = ({ view, setView }) => {
 
         <div className={`hidden lg:flex items-center gap-10 font-semibold text-sm uppercase tracking-wider ${getTextColor()}`}>
           <button onClick={() => changeView('about')} className="hover:text-amber-500 transition-colors py-4 hover-underline">About</button>
-          {['Divisions', 'Catalogue'].map(m => (
+          {['Divisions', ...(siteMode === 'group_only' ? [] : ['Catalogue'])].map(m => (
             <div key={m} className="py-4" onMouseEnter={() => setActiveMega(m)}>
               <button className={`flex items-center gap-1 hover:text-amber-500 transition-colors ${activeMega === m ? 'text-amber-500' : ''}`}>
                 {m} <ChevronDown size={14} className={`transition-transform duration-300 ${activeMega === m ? 'rotate-180' : ''}`} />
               </button>
             </div>
           ))}
-          <button onClick={() => changeView('projects')} className="hover:text-amber-500 transition-colors py-4 hover-underline">Projects</button>
+          {siteMode !== 'group_only' && <button onClick={() => changeView('projects')} className="hover:text-amber-500 transition-colors py-4 hover-underline">Projects</button>}
           <button onClick={() => changeView('contact')} className="hover:text-amber-500 transition-colors py-4 hover-underline">Contact</button>
         </div>
 
         <div className="flex items-center gap-4 md:gap-6">
-          <button onClick={() => changeView('downloads')} className={`hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-widest ${getTextColor()} hover:text-amber-500`}>
-            <Download size={16} /> Downloads
-          </button>
+          {siteMode !== 'group_only' && (
+            <button onClick={() => changeView('downloads')} className={`hidden lg:flex items-center gap-2 text-xs font-bold uppercase tracking-widest ${getTextColor()} hover:text-amber-500`}>
+              <Download size={16} /> Downloads
+            </button>
+          )}
           <Button variant="gold" className="hidden md:flex py-3 px-6 text-xs" onClick={() => changeView('contact')}>Quick Inquiry</Button>
           <button aria-label={isOpen ? 'Close menu' : 'Open menu'} className={`lg:hidden p-2 rounded-lg backdrop-blur-md ${scrolled ? 'text-emerald-950 bg-gray-100' : !isHome ? 'text-white bg-white/20' : 'text-white bg-white/20'}`} onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -1253,34 +1280,36 @@ const Navbar = ({ view, setView }) => {
 // HOME VIEW
 // ========================================
 
-const HomeView = ({ setView }) => (
+const HomeView = ({ setView, siteMode = 'full_access' }) => (
   <>
     <PageHead title="Home" description="Mahalaxmi Group: Industrial excellence in Construction Chemicals, Mining, and Logistics since 1942." />
     <HeroSlider setView={setView} />
     <TrustedByMarquee />
 
-    {/* Chemicals Section */}
-    <section className="py-12 md:py-20 bg-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-16">
-        <div className="flex flex-col-reverse lg:flex-row gap-12 md:gap-24 items-center">
-          <AnimatedSection direction="left" className="lg:w-1/2 w-full">
-            <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Construction Excellence</div>
-            <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-6 leading-tight">Advanced Greenseal <br />Chemical Solutions</h2>
-            <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
-              Developed through UK Technology transfer, our Greenseal range provides specialized waterproofing, high-strength adhesives, and structural repair solutions for modern infrastructure.
-            </p>
-            <div className="grid grid-cols-2 gap-6 mb-10">
-              <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-100"><div className="text-2xl font-bold text-emerald-950 mb-1">UK Tech</div><div className="text-xs text-gray-500 uppercase tracking-wider">Formulation Standard</div></div>
-              <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-100"><div className="text-2xl font-bold text-emerald-950 mb-1">In-House Lab</div><div className="text-xs text-gray-500 uppercase tracking-wider">R&D & Testing</div></div>
-            </div>
-            <Button variant="primary" onClick={() => setView('chemicals')}>View Products Range</Button>
-          </AnimatedSection>
-          <AnimatedSection direction="right" delay={200} className="lg:w-1/2 w-full">
-            <ParallaxImage src="/images/chemicals-product-range.webp" alt="Greenseal Products Range" className="h-[300px] md:h-[500px] w-full shadow-2xl" />
-          </AnimatedSection>
+    {/* Chemicals Section — hidden in group_only mode */}
+    {siteMode === 'full_access' && (
+      <section className="py-12 md:py-20 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 md:px-16">
+          <div className="flex flex-col-reverse lg:flex-row gap-12 md:gap-24 items-center">
+            <AnimatedSection direction="left" className="lg:w-1/2 w-full">
+              <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Construction Excellence</div>
+              <h2 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-6 leading-tight">Advanced Greenseal <br />Chemical Solutions</h2>
+              <p className="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
+                Developed through UK Technology transfer, our Greenseal range provides specialized waterproofing, high-strength adhesives, and structural repair solutions for modern infrastructure.
+              </p>
+              <div className="grid grid-cols-2 gap-6 mb-10">
+                <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-100"><div className="text-2xl font-bold text-emerald-950 mb-1">UK Tech</div><div className="text-xs text-gray-500 uppercase tracking-wider">Formulation Standard</div></div>
+                <div className="bg-emerald-50 p-6 rounded-xl border border-emerald-100"><div className="text-2xl font-bold text-emerald-950 mb-1">In-House Lab</div><div className="text-xs text-gray-500 uppercase tracking-wider">R&D & Testing</div></div>
+              </div>
+              <Button variant="primary" onClick={() => setView('chemicals')}>View Products Range</Button>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={200} className="lg:w-1/2 w-full">
+              <ParallaxImage src="/images/chemicals-product-range.webp" alt="Greenseal Products Range" className="h-[300px] md:h-[500px] w-full shadow-2xl" />
+            </AnimatedSection>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    )}
 
     {/* Mining Parallax Section */}
     <section className="py-12 md:py-20 bg-emerald-50/50 overflow-hidden">
@@ -1349,7 +1378,7 @@ const HomeView = ({ setView }) => (
       </div>
     </section>
 
-    <ProductGallerySection />
+    {siteMode === 'full_access' && <ProductGallerySection />}
     <CallbackSection />
   </>
 );
@@ -1418,7 +1447,7 @@ const AboutView = ({ setView }) => (
           {[
             { n: "Mahendra Shah", r: "Chairman", p: "+91 98200 61842" },
             { n: "Chirag Shah", r: "Managing Director", p: "+91 98210 50005" },
-            { n: "Dhruv Shah", r: "Executive Director", p: "" }
+            { n: "Dhruv Shah", r: "Executive Director", p: "+91 91521 57578" }
           ].map((l, i) => (
             <AnimatedSection key={i} delay={i * 150}>
               <div className="bg-white p-10 rounded-2xl border border-gray-100 text-center card-hover group">
@@ -1575,11 +1604,11 @@ const DivisionsView = ({ setView }) => {
 
 const ChemicalsView = ({ setView }) => (
   <>
-    <PageHead title="Chemicals Division" description="Greenseal waterproofing, tile adhesives, and repair mortars." />
+    <PageHead title="Mahalaxmi Construction Chemicals" description="Greenseal waterproofing, tile adhesives, and repair mortars." />
     <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-16 relative z-10">
         <AnimatedSection className="max-w-4xl">
-          <SectionHeader light={true} title="Mahalaxmi Chemicals" subtitle="Greenseal Construction Chemical Solutions." />
+          <SectionHeader light={true} title="Mahalaxmi Construction Chemicals" subtitle="Greenseal Construction Chemical Solutions." />
           <p className="text-lg md:text-xl text-emerald-100/80 mb-12 max-w-2xl leading-relaxed font-medium">International-standard construction chemicals manufactured locally with UK technology transfer.</p>
           <div className="flex flex-wrap gap-4">
             <Button variant="gold" onClick={() => setView('products')}>Explore Products <ArrowRight size={18} /></Button>
@@ -2509,7 +2538,7 @@ const DownloadsView = () => (
         <div className="grid md:grid-cols-3 gap-8">
           {[
             { name: "Group Profile & Overview", file: "mahalaxmi-group-profile.pdf", size: "4.3 MB" },
-            { name: "Chemicals Division Profile", file: "mahalaxmi-chemicals-profile.pdf", size: "17.4 MB" },
+            { name: "Construction Chemicals Division Profile", file: "mahalaxmi-chemicals-profile.pdf", size: "17.4 MB" },
             { name: "GSP Company Profile 2024", file: "gsp-company-profile-2024.pdf", size: "2.7 MB" },
             { name: "Project Reference List (India)", file: "project-reference-india.pdf", size: "0.1 MB" },
             { name: "Active Projects - Mumbai", file: "project-list-mumbai.pdf", size: "1.7 MB" },
@@ -2569,11 +2598,11 @@ const ContactView = () => {
           <div className="grid lg:grid-cols-2 gap-6 md:gap-16">
             <AnimatedSection>
               <div className="bg-white md:shadow-2xl rounded-2xl md:rounded-3xl p-4 md:p-12 md:border border-gray-100">
-                {/* Tabs — General & Mahalaxmi Chemicals only */}
+                {/* Tabs — General & Mahalaxmi Construction Chemicals only */}
                 <div className="flex gap-2 mb-5 md:mb-8">
                   {[
                     { id: 'general', l: 'General Inquiry' },
-                    { id: 'chemicals', l: 'Mahalaxmi Chemicals' }
+                    { id: 'chemicals', l: 'Mahalaxmi Construction Chemicals' }
                   ].map(t => (
                     <button key={t.id} onClick={() => setActiveTab(t.id)} className={`px-4 py-2.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all ${activeTab === t.id ? 'bg-emerald-950 text-white shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}>{t.l}</button>
                   ))}
@@ -2627,7 +2656,7 @@ const ContactView = () => {
               <div className="space-y-6 md:space-y-12">
                 <div>
                   <h3 className="text-lg md:text-2xl font-bold text-emerald-950 mb-3 md:mb-6">Headquarters</h3>
-                  <p className="text-gray-600 text-sm md:text-lg leading-relaxed mb-4 md:mb-8">Mahalaxmi House, 10-B, Mahal Industrial Estate,<br />Mahakali Caves Road, Andheri (East),<br />Mumbai - 400 093, India</p>
+                  <p className="text-gray-600 text-sm md:text-lg leading-relaxed mb-4 md:mb-8">Ground Floor, 74/C, Kalpasutra Co-op Hsg Society Ltd,<br />Sarojini Road, Opp McDonald's, Vile Parle West,<br />Mumbai - 400 056, India</p>
                   <div className="space-y-3">
                     <a href="tel:+919821050005" className="flex items-center gap-3 text-emerald-950 font-bold hover:text-amber-600 transition-colors text-sm md:text-base"><Phone size={18} className="text-amber-500 shrink-0" /> +91 98210 50005</a>
                     <a href="mailto:info@themahalaxmigroup.com" className="flex items-center gap-3 text-emerald-950 font-bold hover:text-amber-600 transition-colors text-sm md:text-base break-all"><Mail size={18} className="text-amber-500 shrink-0" /> info@themahalaxmigroup.com</a>
@@ -2652,7 +2681,7 @@ const ContactView = () => {
 // FOOTER
 // ========================================
 
-const Footer = ({ setView }) => (
+const Footer = ({ setView, siteMode = 'full_access' }) => (
   <footer className="bg-emerald-950 text-white pt-16 md:pt-24 pb-8 md:pb-12 overflow-hidden relative">
     <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-800 to-transparent"></div>
     <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -2660,7 +2689,7 @@ const Footer = ({ setView }) => (
         {/* Brand + Social */}
         <div className="lg:w-1/4">
           <div className="flex items-center gap-3 mb-5 md:mb-8">
-            <div className="bg-white text-emerald-950 w-10 h-10 flex items-center justify-center rounded-lg font-bold text-xl">M</div>
+            <img src="/images/mahalaxmi-group-logo.png" alt="Mahalaxmi Group" className="w-10 h-10 object-contain" />
             <div className="leading-none">
               <div className="font-bold text-xl tracking-tight">MAHALAXMI</div>
               <div className="text-[8px] text-amber-500 uppercase tracking-[0.2em] font-bold">Group Industrial</div>
@@ -2685,7 +2714,7 @@ const Footer = ({ setView }) => (
           <div>
             <h2 className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4 md:mb-8">Quick Links</h2>
             <ul className="space-y-3 text-emerald-100/70 text-sm font-medium">
-              {['Home', 'About Us', 'Divisions', 'Projects', 'Contact'].map(l => (
+              {['Home', 'About Us', 'Divisions', ...(siteMode === 'group_only' ? [] : ['Projects']), 'Contact'].map(l => (
                 <li key={l}><button onClick={() => { setView(l.toLowerCase().split(' ')[0]); window.scrollTo(0, 0); }} className="hover:text-white hover:translate-x-1 transition-all block">{l}</button></li>
               ))}
             </ul>
@@ -2693,7 +2722,7 @@ const Footer = ({ setView }) => (
           <div>
             <h2 className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4 md:mb-8">Divisions</h2>
             <ul className="space-y-3 text-emerald-100/70 text-sm font-medium">
-              {[{ n: 'Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }].map(l => (
+              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
                 <li key={l.n}><button onClick={() => { setView(l.v); window.scrollTo(0, 0); }} className="hover:text-white hover:translate-x-1 transition-all block">{l.n}</button></li>
               ))}
             </ul>
@@ -2704,11 +2733,11 @@ const Footer = ({ setView }) => (
         <div className="lg:w-1/4">
           <h2 className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4 md:mb-8">Contact</h2>
           <div className="space-y-3 text-emerald-100/70 text-sm font-medium">
-            <div className="leading-relaxed">Mahalaxmi House, Andheri (E),<br />Mumbai - 400 093</div>
+            <div className="leading-relaxed">Ground Floor, 74/C, Kalpasutra Co-op Hsg Society,<br />Sarojini Road, Vile Parle West,<br />Mumbai - 400 056</div>
             <div className="space-y-1.5">
-              <a href="tel:+919152157578" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 91521 57578 <span className="text-emerald-200/60 text-xs">— Dhruv Shah</span></a>
-              <a href="tel:+919820061842" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 98200 61842 <span className="text-emerald-200/60 text-xs">— Mahendra Shah</span></a>
-              <a href="tel:+919821050005" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 98210 50005 <span className="text-emerald-200/60 text-xs">— Chirag Shah</span></a>
+              <a href="tel:+919152157578" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 91521 57578</a>
+              <a href="tel:+919820061842" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 98200 61842</a>
+              <a href="tel:+919821050005" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 98210 50005</a>
             </div>
             <div className="text-sm break-all">info@themahalaxmigroup.com</div>
           </div>
@@ -2767,7 +2796,7 @@ const PrivacyPolicyView = () => (
           </div>
           <div>
             <h2 className="text-2xl font-bold text-emerald-950 mb-4">7. Contact Us</h2>
-            <p className="text-gray-600 leading-relaxed">For privacy-related inquiries, contact:<br />Mahalaxmi Group<br />Mahalaxmi House, Andheri (E), Mumbai - 400 093<br />Email: info@themahalaxmigroup.com<br />Phone: +91 98210 50005</p>
+            <p className="text-gray-600 leading-relaxed">For privacy-related inquiries, contact:<br />Mahalaxmi Group<br />Ground Floor, 74/C, Kalpasutra Co-op Hsg Society, Sarojini Road, Vile Parle West, Mumbai - 400 056<br />Email: info@themahalaxmigroup.com<br />Phone: +91 98210 50005</p>
           </div>
         </div>
       </div>
@@ -2817,13 +2846,217 @@ const TermsOfServiceView = () => (
           </div>
           <div>
             <h2 className="text-2xl font-bold text-emerald-950 mb-4">7. Contact</h2>
-            <p className="text-gray-600 leading-relaxed">For questions about these Terms of Service, contact:<br />Mahalaxmi Group<br />Mahalaxmi House, Andheri (E), Mumbai - 400 093<br />Email: info@themahalaxmigroup.com<br />Phone: +91 98210 50005</p>
+            <p className="text-gray-600 leading-relaxed">For questions about these Terms of Service, contact:<br />Mahalaxmi Group<br />Ground Floor, 74/C, Kalpasutra Co-op Hsg Society, Sarojini Road, Vile Parle West, Mumbai - 400 056<br />Email: info@themahalaxmigroup.com<br />Phone: +91 98210 50005</p>
           </div>
         </div>
       </div>
     </section>
   </>
 );
+
+// ========================================
+// ADMIN LOGIN
+// ========================================
+const AdminLogin = () => {
+  const [creds, setCreds] = useState({ username: '', password: '' });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch('/admin/admin-auth.php?action=check', { credentials: 'include' })
+      .then(r => {
+        const ct = r.headers.get('content-type') || '';
+        if (!ct.includes('application/json')) throw new Error('no-php');
+        return r.json();
+      })
+      .then(d => { if (d.authenticated) navigate('/admin/panel'); })
+      .catch(() => { })
+      .finally(() => setChecking(false));
+  }, [navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/admin/admin-auth.php?action=login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(creds)
+      });
+      const ct = res.headers.get('content-type') || '';
+      if (!ct.includes('application/json')) {
+        throw new Error('PHP is not available. Deploy to your cPanel server to use the admin panel.');
+      }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Login failed');
+      navigate('/admin/panel');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (checking) return <div className="min-h-screen bg-emerald-950 flex items-center justify-center"><div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div></div>;
+
+  return (
+    <div className="min-h-screen bg-emerald-950 flex items-center justify-center px-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-10">
+          <img src="/images/mahalaxmi-group-logo.png" alt="Mahalaxmi Group" className="w-16 h-16 mx-auto mb-4 object-contain" />
+          <h1 className="text-2xl font-bold text-white tracking-tight">Admin Panel</h1>
+          <p className="text-emerald-100/50 text-sm mt-1">Mahalaxmi Group Website</p>
+        </div>
+        <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 space-y-5">
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-bold text-emerald-100/60 uppercase tracking-widest">Username</label>
+            <input type="text" value={creds.username} onChange={e => setCreds(p => ({ ...p, username: e.target.value }))} required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-emerald-100/30 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all text-sm" placeholder="Enter username" />
+          </div>
+          <div className="space-y-1.5">
+            <label className="text-[10px] font-bold text-emerald-100/60 uppercase tracking-widest">Password</label>
+            <input type="password" value={creds.password} onChange={e => setCreds(p => ({ ...p, password: e.target.value }))} required className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-emerald-100/30 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all text-sm" placeholder="Enter password" />
+          </div>
+          {error && <div className="text-red-400 text-sm bg-red-500/10 border border-red-500/20 p-3 rounded-lg">{error}</div>}
+          <button type="submit" disabled={loading} className="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-emerald-950 font-bold uppercase tracking-widest text-xs rounded-xl transition-colors disabled:opacity-50 shadow-lg">
+            {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+        </form>
+        <p className="text-center text-emerald-100/30 text-[10px] mt-8 uppercase tracking-widest">Restricted Access</p>
+      </div>
+    </div>
+  );
+};
+
+// ========================================
+// ADMIN PANEL
+// ========================================
+const AdminPanel = () => {
+  const [mode, setMode] = useState('group_only');
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check auth first
+    fetch('/admin/admin-auth.php?action=check', { credentials: 'include' })
+      .then(r => r.json())
+      .then(d => { if (!d.authenticated) navigate('/admin'); })
+      .catch(() => navigate('/admin'));
+
+    // Get current mode
+    fetch('/admin/admin-api.php?action=get_mode')
+      .then(r => r.json())
+      .then(d => setMode(d.mode || 'group_only'))
+      .catch(() => { })
+      .finally(() => setLoading(false));
+  }, [navigate]);
+
+  const toggleMode = async () => {
+    const newMode = mode === 'group_only' ? 'full_access' : 'group_only';
+    setSaving(true);
+    setMessage('');
+    try {
+      const res = await fetch('/admin/admin-api.php?action=set_mode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ mode: newMode })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to update');
+      setMode(newMode);
+      setMessage(`Mode switched to: ${newMode === 'full_access' ? 'Full Access' : 'Group Only'}`);
+    } catch (err) {
+      setMessage('Error: ' + err.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleLogout = async () => {
+    await fetch('/admin/admin-auth.php?action=logout', { credentials: 'include' });
+    navigate('/admin');
+  };
+
+  if (loading) return <div className="min-h-screen bg-emerald-950 flex items-center justify-center"><div className="w-8 h-8 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div></div>;
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Admin Header */}
+      <header className="bg-emerald-950 shadow-lg">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img src="/images/mahalaxmi-group-logo.png" alt="" className="w-8 h-8 object-contain" />
+            <div>
+              <div className="text-white font-bold text-sm tracking-tight">MAHALAXMI</div>
+              <div className="text-amber-500 text-[8px] uppercase tracking-widest font-bold">Admin Panel</div>
+            </div>
+          </div>
+          <button onClick={handleLogout} className="text-emerald-100/60 hover:text-white text-xs uppercase tracking-widest font-bold transition-colors">Logout</button>
+        </div>
+      </header>
+
+      {/* Content */}
+      <div className="container mx-auto px-6 py-12 max-w-2xl">
+        <h1 className="text-2xl font-bold text-emerald-950 mb-2">Site Visibility Control</h1>
+        <p className="text-gray-500 mb-10">Toggle which content is displayed on the public website.</p>
+
+        {/* Mode Toggle Card */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <div className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Current Mode</div>
+              <div className={`text-xl font-bold ${mode === 'full_access' ? 'text-emerald-600' : 'text-amber-600'}`}>
+                {mode === 'full_access' ? 'Full Access' : 'Group Only'}
+              </div>
+            </div>
+            <button onClick={toggleMode} disabled={saving} className={`relative w-16 h-9 rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 ${mode === 'full_access' ? 'bg-emerald-500' : 'bg-gray-300'}`}>
+              <span className={`absolute top-1 left-1 w-7 h-7 bg-white rounded-full shadow-md transition-transform duration-300 ${mode === 'full_access' ? 'translate-x-7' : 'translate-x-0'}`}></span>
+            </button>
+          </div>
+
+          {/* Mode Details */}
+          <div className="grid grid-cols-2 gap-4">
+            <div className={`p-5 rounded-xl border-2 transition-colors ${mode === 'group_only' ? 'border-amber-500 bg-amber-50' : 'border-gray-100 bg-gray-50'}`}>
+              <div className="text-sm font-bold text-emerald-950 mb-2">Group Only</div>
+              <ul className="text-xs text-gray-500 space-y-1.5">
+                <li>• Hides Chemicals section on Home</li>
+                <li>• Hides Gallery on Home</li>
+                <li>• Hides Chemicals from menus</li>
+                <li>• Blocks Chemicals page</li>
+              </ul>
+            </div>
+            <div className={`p-5 rounded-xl border-2 transition-colors ${mode === 'full_access' ? 'border-emerald-500 bg-emerald-50' : 'border-gray-100 bg-gray-50'}`}>
+              <div className="text-sm font-bold text-emerald-950 mb-2">Full Access</div>
+              <ul className="text-xs text-gray-500 space-y-1.5">
+                <li>• Shows all content</li>
+                <li>• Chemicals section visible</li>
+                <li>• Gallery visible on Home</li>
+                <li>• All pages accessible</li>
+              </ul>
+            </div>
+          </div>
+
+          {message && (
+            <div className={`mt-6 p-3 rounded-lg text-sm font-medium ${message.startsWith('Error') ? 'bg-red-50 text-red-600 border border-red-100' : 'bg-emerald-50 text-emerald-700 border border-emerald-100'}`}>
+              {message}
+            </div>
+          )}
+        </div>
+
+        {/* Info Text */}
+        <p className="text-gray-400 text-xs mt-6 text-center">
+          Changes take effect immediately for new visitors. Cached pages may take a few seconds to update.
+        </p>
+      </div>
+    </div>
+  );
+};
 
 // ========================================
 // MAIN APP COMPONENT
@@ -2864,6 +3097,18 @@ export default function App() {
   const [activeProject, setActiveProject] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const { siteMode } = useSiteMode();
+
+  // Admin routes — render without main layout
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  if (isAdminRoute) {
+    return (
+      <Routes>
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/panel" element={<AdminPanel />} />
+      </Routes>
+    );
+  }
 
   // Map old view names to new URL paths
   const viewToPath = {
@@ -2891,29 +3136,35 @@ export default function App() {
   return (
     <div className="min-h-screen bg-white font-body text-emerald-950 selection:bg-amber-100 selection:text-emerald-950 container-boxed relative overflow-x-hidden">
       <ScrollToTop />
-      <Navbar view={view} setView={setView} />
+      <Navbar view={view} setView={setView} siteMode={siteMode} />
       <div className="page-enter">
         <Routes>
-          <Route path="/" element={<HomeView setView={setView} />} />
+          <Route path="/" element={<HomeView setView={setView} siteMode={siteMode} />} />
           <Route path="/about" element={<AboutView setView={setView} />} />
           <Route path="/about/group" element={<GroupView setView={setView} />} />
           <Route path="/divisions" element={<DivisionsView setView={setView} />} />
-          <Route path="/divisions/chemicals" element={<ChemicalsView setView={setView} />} />
+          {siteMode === 'full_access' && (
+            <Route path="/divisions/chemicals" element={<ChemicalsView setView={setView} />} />
+          )}
           <Route path="/divisions/millennium" element={<MillenniumView setView={setView} />} />
           <Route path="/divisions/shiv-minerals" element={<ShivMineralsView setView={setView} />} />
           <Route path="/divisions/oem" element={<OEMView setView={setView} />} />
           <Route path="/divisions/infrastructure" element={<InfraView setView={setView} />} />
           <Route path="/divisions/transport" element={<TransportView setView={setView} />} />
-          <Route path="/products" element={<ProductsView setActiveProduct={setActiveProduct} setView={setView} />} />
-          <Route path="/products/detail" element={<ProductDetailView product={activeProduct} setView={setView} />} />
-          <Route path="/projects" element={<ProjectsView setView={setView} setActiveProject={setActiveProject} />} />
-          <Route path="/projects/detail" element={<ProjectDetailView project={activeProject} setView={setView} />} />
+          {siteMode !== 'group_only' && (
+            <>
+              <Route path="/products" element={<ProductsView setActiveProduct={setActiveProduct} setView={setView} />} />
+              <Route path="/products/detail" element={<ProductDetailView product={activeProduct} setView={setView} />} />
+              <Route path="/projects" element={<ProjectsView setView={setView} setActiveProject={setActiveProject} />} />
+              <Route path="/projects/detail" element={<ProjectDetailView project={activeProject} setView={setView} />} />
+              <Route path="/downloads" element={<DownloadsView />} />
+            </>
+          )}
           <Route path="/solutions" element={<ApplicationsView setView={setView} />} />
-          <Route path="/downloads" element={<DownloadsView />} />
           <Route path="/contact" element={<ContactView />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyView />} />
           <Route path="/terms-of-service" element={<TermsOfServiceView />} />
-          <Route path="*" element={<HomeView setView={setView} />} />
+          <Route path="*" element={<HomeView setView={setView} siteMode={siteMode} />} />
         </Routes>
       </div>
 
@@ -2925,14 +3176,16 @@ export default function App() {
             <p className="text-emerald-900/80 text-lg font-bold mb-10 max-w-2xl mx-auto">Join 500+ industrial partners trusting Mahalaxmi for their raw material and chemical needs.</p>
             <div className="flex justify-center gap-4">
               <Button variant="primary" onClick={() => setView('contact')} className="shadow-xl">Start Project <ArrowRight size={16} /></Button>
-              <Button variant="white" onClick={() => setView('products')} className="shadow-xl">View Catalogue</Button>
+              {siteMode !== 'group_only' && (
+                <Button variant="white" onClick={() => setView('products')} className="shadow-xl">View Catalogue</Button>
+              )}
             </div>
           </div>
           <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-multiply"></div>
         </section>
       )}
 
-      <Footer setView={setView} />
+      <Footer setView={setView} siteMode={siteMode} />
       <ChatWidget />
     </div>
   );

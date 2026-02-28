@@ -683,16 +683,21 @@ const MillenniumView = ({ setView }) => (
             <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Silica Sand & Aggregate Supply</h3>
             <p className="text-gray-600 text-lg mb-6 leading-relaxed">At our Phonda Ghat operations, we produce high-quality silica sand alongside our basalt aggregate portfolio. Our silica sand meets the stringent quality requirements of both the glass manufacturing and foundry casting industries.</p>
             <p className="text-gray-600 mb-8 leading-relaxed">The operation spans surface mining, washing, grading, and packaging — all conducted under strict environmental compliance. We maintain dedicated stockpiles for different grades, enabling rapid fulfillment of large-volume orders without compromising quality consistency.</p>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { n: "Basalt Aggregates", d: "20mm, 40mm graded stone" },
-                { n: "M-Sand", d: "Manufactured sand for concrete" },
-                { n: "Silica Sand", d: "Glass & foundry grade" },
-                { n: "Road Metal", d: "WBM & base course material" }
+                { n: "Basalt Aggregates", d: "10mm & 20mm", img: "/images/millennium-basalt-20mm.jpeg", badge: "Stone" },
+                { n: "Crush Sand", d: "For Concrete", img: "/images/millennium-crush-sand.jpeg", badge: "M-Sand" },
+                { n: "Construction Sand", d: "15–20 AFS Wet", img: "/images/millennium-construction-sand.jpeg", badge: "Construction" },
+                { n: "Road Metal", d: "WBM & Base Course", img: "/images/basalt-mining.jpeg", badge: "Aggregate" }
               ].map((p, i) => (
-                <div key={i} className="bg-white p-4 rounded-xl border border-gray-200">
-                  <div className="font-bold text-emerald-950 text-sm">{p.n}</div>
-                  <div className="text-[10px] text-gray-500 uppercase tracking-widest font-bold">{p.d}</div>
+                <div key={i} className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm card-hover">
+                  <div className="aspect-square overflow-hidden">
+                    <img src={p.img} alt={p.n} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  </div>
+                  <div className="p-3 text-center">
+                    <div className="font-black text-emerald-950 text-sm">{p.n}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest mt-0.5 px-2 py-0.5 rounded-full inline-block bg-amber-50 text-amber-600">{p.d}</div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -786,7 +791,7 @@ const ShivMineralsView = ({ setView }) => (
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-emerald-950 mb-4 uppercase tracking-tight">Industrial-Scale Silica Processing</h3>
                 <p className="text-gray-700 mb-4 leading-relaxed">Shiv Minerals, established in 2017 at Jhagadia, is one of the largest silica sand manufacturers and processors in India. We specialise in silica sand for the foundry and glass industries.</p>
-                <p className="text-gray-700 mb-6 leading-relaxed">This industrial-scale operation ensures a constant, high-quality reservoir of raw material, mitigating supply chain risks and guaranteeing uninterrupted availability for our partners. Silica sand is sourced from Bharuch, while M-sand is produced at Wada Palghar, maintaining clear structure and quality control.</p>
+                <p className="text-gray-700 mb-6 leading-relaxed">This industrial-scale operation ensures a constant, high-quality reservoir of raw material, mitigating supply chain risks and guaranteeing uninterrupted availability for our partners. Silica sand is sourced from Bharuch, while M-sand and construction sand are produced at our <strong>Manor factory, Palghar</strong> (Wada Palghar), maintaining clear structure and quality control.</p>
                 <p className="text-gray-700 font-bold mb-4">Key Clients:</p>
                 <div className="flex flex-wrap gap-3">
                   {['Metso', 'Mahindra CIE', 'Tata Motors (Telco)', 'Sandvik', 'Canpack Glass', 'Haldyn Glass'].map(c => <span key={c} className="bg-white px-4 py-2 rounded-full border border-gray-200 text-xs font-bold uppercase tracking-wider shadow-sm">{c}</span>)}
@@ -801,7 +806,7 @@ const ShivMineralsView = ({ setView }) => (
         </AnimatedSection>
 
         <AnimatedSection delay={200}>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-10">
             <div className="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
               <h4 className="text-lg font-bold text-emerald-950 uppercase mb-4">Foundry Sand</h4>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Silica sand for the foundry industry, serving major clients such as Metso, Sandvik, Tata Motors (Telco), and Mahindra CIE. We specialise in consistent quality supply for casting applications.</p>
@@ -811,6 +816,33 @@ const ShivMineralsView = ({ setView }) => (
               <p className="text-gray-600 text-sm leading-relaxed mb-4">Silica sand for the glass industry, supplying Canpack Glass and Haldyn Glass Limited. Our industrial-scale operation guarantees uninterrupted availability and consistent quality for glass manufacturing.</p>
             </div>
           </div>
+        </AnimatedSection>
+
+        {/* Available AFS Grades */}
+        <AnimatedSection delay={300}>
+          <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-2">Available Grades</div>
+          <h4 className="text-xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Silica Sand — AFS Grades</h4>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {[
+              { label: "30–40 AFS", type: "Dry", img: "/images/shiv-dry-30-40.jpeg" },
+              { label: "40–50 AFS", type: "Dry", img: "/images/shiv-dry-40-50.jpeg" },
+              { label: "50–60 AFS", type: "Dry", img: "/images/shiv-dry-50-60.jpeg" },
+              { label: "40–50 AFS", type: "Wet", img: "/images/shiv-wet-40-50.jpeg" },
+              { label: "50–60 AFS", type: "Wet (MT)", img: "/images/shiv-wet-50-60.jpeg" },
+            ].map((g, i) => (
+              <div key={i} className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm card-hover">
+                <div className="aspect-square overflow-hidden">
+                  <img src={g.img} alt={`${g.label} ${g.type} Silica Sand`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" loading="lazy" />
+                </div>
+                <div className="p-3 text-center">
+                  <div className="font-black text-emerald-950 text-sm">{g.label}</div>
+                  <div className={`text-[10px] font-bold uppercase tracking-widest mt-0.5 px-2 py-0.5 rounded-full inline-block ${g.type.startsWith('Wet') ? 'bg-blue-50 text-blue-600' : 'bg-amber-50 text-amber-600'
+                    }`}>{g.type}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="text-gray-500 text-sm mt-4">* 15–20 AFS Wet (Construction grade) also available. Contact us for specifications.</p>
         </AnimatedSection>
       </div>
     </section>

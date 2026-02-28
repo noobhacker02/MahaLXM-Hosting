@@ -2242,6 +2242,10 @@ const TransportView = ({ setView }) => (
   <>
     <PageHead title="Logistics & Fleet" description="Zero-delay transport solutions with our proprietary fleet of 50+ vehicles." />
     <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 text-white relative overflow-hidden">
+      <div className="absolute inset-0">
+        <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Transport Logistics" className="w-full h-full object-cover opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-950/95 to-emerald-950/80"></div>
+      </div>
       <div className="container mx-auto px-4 md:px-16 relative z-10">
         <AnimatedSection className="max-w-4xl">
           <div className="inline-block px-4 py-1 border border-amber-500/50 rounded-full text-amber-500 text-[10px] font-bold uppercase tracking-widest mb-6">Logistics & Fleet</div>
@@ -2366,8 +2370,12 @@ const TransportView = ({ setView }) => (
 const OEMView = ({ setView }) => (
   <>
     <PageHead title="Contract Manufacturing" description="Private label construction chemical manufacturing services." />
-    <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 text-white">
-      <div className="container mx-auto px-6"><AnimatedSection className="max-w-4xl">
+    <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 text-white relative overflow-hidden">
+      <div className="absolute inset-0">
+        <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="OEM Manufacturing" className="w-full h-full object-cover opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-950/95 to-emerald-950/80"></div>
+      </div>
+      <div className="container mx-auto px-6 relative z-10"><AnimatedSection className="max-w-4xl">
         <div className="inline-block px-4 py-1 border border-amber-500/50 rounded-full text-amber-500 text-[10px] font-bold uppercase tracking-widest mb-6">OEM Services</div>
         <h1 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4">Contract Manufacturing</h1>
         <p className="text-xl text-emerald-100/90 mb-8 font-light">Private-label production for international and domestic brands.</p>
@@ -2392,7 +2400,7 @@ const OEMView = ({ setView }) => (
               <div className="bg-gray-50 p-10 rounded-2xl border border-gray-100 card-hover text-center group h-full">
                 <div className="text-emerald-950 mb-6 flex justify-center group-hover:text-amber-500 transition-colors">{React.cloneElement(c.i, { size: 40 })}</div>
                 <h4 className="text-lg font-bold text-emerald-950 uppercase mb-4 tracking-tight">{c.t}</h4>
-                <p className="text-gray-500 text-sm leading-relaxed">{c.d}</p>
+                <p className="text-gray-500 text-[11px] leading-relaxed">{c.d}</p>
               </div>
             </AnimatedSection>
           ))}

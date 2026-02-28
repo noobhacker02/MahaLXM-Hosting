@@ -2241,7 +2241,7 @@ const ProjectDetailView = ({ project, setView }) => {
 const TransportView = ({ setView }) => (
   <>
     <PageHead title="Logistics & Fleet" description="Zero-delay transport solutions with our proprietary fleet of 50+ vehicles." />
-    <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 relative overflow-hidden">
+    <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 text-white relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-16 relative z-10">
         <AnimatedSection className="max-w-4xl">
           <div className="inline-block px-4 py-1 border border-amber-500/50 rounded-full text-amber-500 text-[10px] font-bold uppercase tracking-widest mb-6">Logistics & Fleet</div>

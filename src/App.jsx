@@ -746,11 +746,11 @@ const MillenniumView = ({ setView }) => (
           </AnimatedSection>
           <AnimatedSection direction="right" delay={200}>
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Strategic Partnerships</div>
-            <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Amazon India & Warehousing</h3>
-            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Our partnership with Amazon India for warehousing and distribution operations showcases our ability to diversify beyond mining while maintaining the same standards of operational excellence.</p>
-            <p className="text-gray-600 mb-8 leading-relaxed">We provide strategically located warehousing facilities with mechanized loading/unloading, inventory management systems, and last-mile connectivity — serving both our own aggregate distribution needs and third-party logistics requirements.</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Mega Infrastructure Partnerships</h3>
+            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Our proven track record in fulfilling massive volume requirements has made Mahalaxmi Millennium the preferred aggregate partner for India's leading infrastructure and cement conglomerates.</p>
+            <p className="text-gray-600 mb-8 leading-relaxed">Through dedicated supply lines, automated crushing plants, and our robust logistics network, we ensure zero-downtime raw material availability for critical national projects, including high-speed rail networks, expressways, and heavy industrial applications.</p>
             <div className="flex flex-wrap gap-3">
-              {['Amazon India', 'L&T', 'UltraTech', 'ACC', 'Milan Infra', 'Megha Engg'].map(c => <span key={c} className="bg-emerald-50 px-4 py-2 rounded-full border border-emerald-200 text-xs font-bold uppercase tracking-wider">{c}</span>)}
+              {['L&T', 'UltraTech', 'ACC', 'Milan Infra', 'Megha Engg', 'Shapoorji Pallonji'].map(c => <span key={c} className="bg-emerald-50 px-4 py-2 rounded-full border border-emerald-200 text-xs font-bold uppercase tracking-wider">{c}</span>)}
             </div>
           </AnimatedSection>
         </div>

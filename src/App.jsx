@@ -2280,7 +2280,7 @@ const TransportView = ({ setView }) => (
         </AnimatedSection>
 
         <div className="flex flex-col lg:flex-row gap-16 items-center mb-20">
-          <AnimatedSection direction="left" className="lg:w-1/2">
+          <AnimatedSection direction="left" className="lg:w-1/2 w-full">
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Our Fleet</div>
             <h3 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-6 leading-tight">Purpose-Built for<br />Heavy Industry</h3>
             <p className="text-gray-600 mb-8 leading-relaxed text-lg">Our fleet comprises 16-tyre tippers, bulk carriers, and specialized transport vehicles designed for mining output, aggregate supply, and construction chemical delivery. Each vehicle is GPS-tracked and maintained to the highest safety standards.</p>
@@ -2299,16 +2299,16 @@ const TransportView = ({ setView }) => (
               ))}
             </div>
           </AnimatedSection>
-          <AnimatedSection direction="right" delay={200} className="lg:w-1/2">
+          <AnimatedSection direction="right" delay={200} className="lg:w-1/2 w-full">
             <ParallaxImage src="/images/logistics-fleet-2.jpeg" alt="Mahalaxmi Fleet" className="h-[300px] md:h-[450px] w-full shadow-2xl" />
           </AnimatedSection>
         </div>
 
         <div className="flex flex-col-reverse lg:flex-row gap-16 items-center">
-          <AnimatedSection direction="left" delay={200} className="lg:w-1/2">
+          <AnimatedSection direction="left" delay={200} className="lg:w-1/2 w-full">
             <ParallaxImage src="/images/transport-contracts.jpg" alt="Transport Operations" className="h-[300px] md:h-[450px] w-full shadow-2xl" />
           </AnimatedSection>
-          <AnimatedSection direction="right" className="lg:w-1/2">
+          <AnimatedSection direction="right" className="lg:w-1/2 w-full">
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Key Partners</div>
             <h3 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-6 leading-tight">Trusted by India's<br />Largest Corporations</h3>
             <p className="text-gray-600 mb-8 leading-relaxed text-lg">We handle transport contracts for some of the country's most demanding industrial operations, ensuring on-time delivery for mega-infrastructure projects.</p>

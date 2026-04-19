@@ -1186,10 +1186,7 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
         { n: 'Construction Chemicals', v: 'chemicals' }, { n: 'OEM Manufacturing', v: 'oem' },
         { n: 'Mahalaxmi Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' },
         { n: 'Transport & Logistics', v: 'transport' }, { n: 'Infrastructure', v: 'infra' },
-        { n: 'Legacy & Ventures', v: 'legacy' },
-        { n: 'Pioneer Sales', v: 'legacy#pioneer' }, { n: 'Int. Chemical Co.', v: 'legacy#international' },
-        { n: 'Chirag Warehousing', v: 'legacy#warehousing' }, { n: 'Chirag Mining', v: 'legacy#mining' },
-        { n: 'Venture Capital', v: 'legacy#vc' }
+        { n: 'Legacy & Ventures', v: 'legacy' }
       ]
     },
     { n: 'Solutions', v: 'applications' },
@@ -1216,12 +1213,7 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
         { n: 'Shiv Minerals', v: 'shiv', i: <Microscope size={16} /> },
         { n: 'Transport & Logistics', v: 'transport', i: <Truck size={16} /> },
         { n: 'Infrastructure', v: 'infra', i: <Building2 size={16} /> },
-        { n: 'Legacy & Ventures', v: 'legacy', i: <Briefcase size={16} /> },
-        { n: 'Pioneer Sales', v: 'legacy#pioneer', i: <Briefcase size={16} /> },
-        { n: 'Int. Chemical Co.', v: 'legacy#international', i: <FlaskConical size={16} /> },
-        { n: 'Chirag Warehousing', v: 'legacy#warehousing', i: <Package size={16} /> },
-        { n: 'Chirag Mining', v: 'legacy#mining', i: <HardHat size={16} /> },
-        { n: 'Venture Capital', v: 'legacy#vc', i: <Globe size={16} /> }
+        { n: 'Legacy & Ventures', v: 'legacy', i: <Briefcase size={16} /> }
       ].filter(item => siteMode === 'group_only' ? item.v !== 'chemicals' : true)
     },
     'Catalogue': {

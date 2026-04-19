@@ -2287,9 +2287,10 @@ const TransportView = ({ setView }) => (
 
         <div className="flex flex-col lg:flex-row gap-16 items-center mb-20">
           <AnimatedSection direction="left" className="lg:w-1/2 w-full">
-            <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Our Fleet</div>
+            <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Mahalaxmi Enterprises & Our Fleet</div>
             <h3 className="text-3xl md:text-4xl font-bold text-emerald-950 mb-6 leading-tight">Purpose-Built for<br />Heavy Industry</h3>
-            <p className="text-gray-600 mb-8 leading-relaxed text-lg">Our fleet comprises 16-tyre tippers, bulk carriers, and specialized transport vehicles designed for mining output, aggregate supply, and construction chemical delivery. Each vehicle is GPS-tracked and maintained to the highest safety standards.</p>
+            <p className="text-gray-600 mb-8 leading-relaxed text-lg">Under Mahalaxmi Enterprises (established December 2024), we rapidly expanded our proprietary logistics capabilities with 10 modern 16-tyre tippers. Working in tandem with our wider network of 35-40 collaborated tipper owners, we handle massive scale operations.</p>
+            <p className="text-gray-600 mb-8 leading-relaxed text-lg">Our combined fleet handles mining output, aggregate supply, and construction chemical delivery. Each vehicle ensures a long-term reliable transport solution with maximum efficiency.</p>
             <div className="space-y-4">
               {[
                 "16-tyre heavy-duty tippers for mining output",
@@ -2321,7 +2322,9 @@ const TransportView = ({ setView }) => (
             <div className="grid grid-cols-2 gap-4">
               {[
                 { n: "Ultratech Cement", r: "Bulk Transport" },
-                { n: "L&T Construction", r: "Project Logistics" },
+                { n: "Ultratech Cement", r: "Transport Contracts" },
+              { n: "L&T Construction", r: "Project Logistics" },
+              { n: "JSW", r: "Heavy Transport" },
                 { n: "JSW Steel", r: "Material Haulage" },
                 { n: "Amazon India", r: "Warehousing & Last-Mile" },
                 { n: "ACC Cement", r: "Aggregate Supply" },
@@ -2467,6 +2470,19 @@ const InfraView = ({ setView }) => (
               ))}
             </div>
             <Button variant="primary" className="mt-10" onClick={() => setView('contact')}>Schedule Plant Visit</Button>
+          </AnimatedSection>
+        </div>
+
+        {/* Maa Ambika LLP */}
+        <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
+          <AnimatedSection direction="left" className="order-2 md:order-1">
+            <ParallaxImage src="https://images.pexels.com/photos/110813/pexels-photo-110813.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Maa Ambika LLP RMC Plant" className="h-[400px] shadow-2xl" />
+          </AnimatedSection>
+          <AnimatedSection direction="right" delay={200} className="order-1 md:order-2">
+            <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Strategic Joint Ventures</div>
+            <SectionHeader title="Maa Ambika LLP" subtitle="High-Capacity RMC Plant at Mahol." />
+            <p className="text-gray-600 text-lg leading-relaxed mb-8">In partnership with Infra Market, Maa Ambika LLP established a massive, high-capacity RMC Plant at Mahol. This strategically located central manufacturing hub serves the rapid development across Central, Eastern, and South Mumbai markets.</p>
+            <p className="text-gray-600 text-lg leading-relaxed mb-8">This collaboration ensures superior product quality, timely delivery, and scalable solutions tailored specifically for extremely dense, large-scale urban infrastructure projects.</p>
           </AnimatedSection>
         </div>
 
@@ -3188,8 +3204,25 @@ const LegacyVenturesView = ({ setView }) => {
         </div>
       </section>
 
+      {/* International Chemical Company */}
+      <section id="international" className="py-16 md:py-24 bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection direction="left" className="order-2 lg:order-1">
+              <img src="/images/chemicals-lab-testing.webp" alt="International Chemical Company" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full opacity-90" />
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={200} className="order-1 lg:order-2">
+              <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Pioneering Production (1970s)</div>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-emerald-950 mb-6 tracking-tight">International Chemical Company</h2>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">Among the pioneers in producing Sodium Silicate at Sakinaka, Mumbai, during the 1970s.</p>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">Over time, we expanded into the Ready-Mix Concrete (RMC) business in collaboration with Ashoka Buildcon Ltd., a partnership that thrived for over 12 years. Currently, the company operates a successful Joint Venture with ACC Ltd., further strengthening our footprint in India's growing infrastructure sector.</p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* Chirag Warehousing */}
-      <section id="warehousing" className="py-16 md:py-24 bg-gray-50 border-b border-gray-200">
+      <section id="warehousing" className="py-16 md:py-24 bg-white border-b border-gray-100">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection direction="left" className="order-2 lg:order-1">
@@ -3210,7 +3243,7 @@ const LegacyVenturesView = ({ setView }) => {
       </section>
 
       {/* Chirag Mining */}
-      <section id="mining" className="py-16 md:py-24 bg-white border-b border-gray-100">
+      <section id="mining" className="py-16 md:py-24 bg-gray-50 border-b border-gray-200">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <AnimatedSection direction="left">

@@ -2436,7 +2436,22 @@ const OEMView = ({ setView }) => (
 // INFRASTRUCTURE VIEW
 // ========================================
 
-const InfraView = ({ setView }) => (
+const InfraView = ({ setView }) => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [hash]);
+
+  return (
   <>
     <PageHead title="Infrastructure" description="Infrastructure development and manufacturing hubs." />
     <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 text-white text-center relative overflow-hidden">
@@ -2475,9 +2490,9 @@ const InfraView = ({ setView }) => (
         </div>
 
         {/* Maa Ambika LLP */}
-        <div className="grid md:grid-cols-2 gap-16 items-center mb-32">
+        <div id="maa-ambika" className="grid md:grid-cols-2 gap-16 items-center mb-32">
           <AnimatedSection direction="left" className="order-2 md:order-1">
-            <ParallaxImage src="https://images.pexels.com/photos/110813/pexels-photo-110813.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Maa Ambika LLP RMC Plant" className="h-[400px] shadow-2xl" />
+            <ParallaxImage src="/images/maa-ambika-rmc-plant.jpeg" alt="Maa Ambika LLP RMC Plant" className="h-[400px] shadow-2xl" />
           </AnimatedSection>
           <AnimatedSection direction="right" delay={200} className="order-1 md:order-2">
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Strategic Joint Ventures</div>
@@ -2537,8 +2552,8 @@ const InfraView = ({ setView }) => (
       </div>
     </section>
   </>
-
-);
+  );
+};
 
 // ========================================
 // APPLICATIONS VIEW
@@ -2785,7 +2800,7 @@ const Footer = ({ setView, siteMode = 'full_access' }) => (
           <div>
             <h2 className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4 md:mb-8">Divisions</h2>
             <ul className="space-y-3 text-emerald-100/70 text-sm font-medium">
-              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }, { n: 'Legacy & Ventures', v: 'legacy' }, { n: 'Pioneer Sales', v: 'legacy#pioneer' }, { n: 'Int. Chemical Co.', v: 'legacy#international' }, { n: 'Chirag Warehousing', v: 'legacy#warehousing' }, { n: 'Chirag Mining', v: 'legacy#mining' }, { n: 'Venture Capital', v: 'legacy#vc' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
+              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }, { n: 'Maa Ambika LLP', v: 'infra#maa-ambika' }, { n: 'Legacy & Ventures', v: 'legacy' }, { n: 'Pioneer Sales', v: 'legacy#pioneer' }, { n: 'Int. Chemical Co.', v: 'legacy#international' }, { n: 'Chirag Warehousing', v: 'legacy#warehousing' }, { n: 'Chirag Mining', v: 'legacy#mining' }, { n: 'Venture Capital', v: 'legacy#vc' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
                 <li key={l.n}><button onClick={() => { setView(l.v); window.scrollTo(0, 0); }} className="hover:text-white hover:translate-x-1 transition-all block">{l.n}</button></li>
               ))}
             </ul>

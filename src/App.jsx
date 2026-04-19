@@ -1185,7 +1185,8 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
       n: 'Divisions', v: 'divisions', sub: [
         { n: 'Construction Chemicals', v: 'chemicals' }, { n: 'OEM Manufacturing', v: 'oem' },
         { n: 'Mahalaxmi Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' },
-        { n: 'Transport & Logistics', v: 'transport' }, { n: 'Infrastructure', v: 'infra' }
+        { n: 'Transport & Logistics', v: 'transport' }, { n: 'Infrastructure', v: 'infra' },
+        { n: 'Legacy & Ventures', v: 'legacy' }
       ]
     },
     { n: 'Solutions', v: 'applications' },
@@ -1211,7 +1212,8 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
         { n: 'Mahalaxmi Millennium', v: 'millennium', i: <HardHat size={16} /> },
         { n: 'Shiv Minerals', v: 'shiv', i: <Microscope size={16} /> },
         { n: 'Transport & Logistics', v: 'transport', i: <Truck size={16} /> },
-        { n: 'Infrastructure', v: 'infra', i: <Building2 size={16} /> }
+        { n: 'Infrastructure', v: 'infra', i: <Building2 size={16} /> },
+        { n: 'Legacy & Ventures', v: 'legacy', i: <Briefcase size={16} /> }
       ].filter(item => siteMode === 'group_only' ? item.v !== 'chemicals' : true)
     },
     'Catalogue': {
@@ -2766,7 +2768,7 @@ const Footer = ({ setView, siteMode = 'full_access' }) => (
           <div>
             <h2 className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4 md:mb-8">Divisions</h2>
             <ul className="space-y-3 text-emerald-100/70 text-sm font-medium">
-              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
+              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }, { n: 'Legacy & Ventures', v: 'legacy' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
                 <li key={l.n}><button onClick={() => { setView(l.v); window.scrollTo(0, 0); }} className="hover:text-white hover:translate-x-1 transition-all block">{l.n}</button></li>
               ))}
             </ul>

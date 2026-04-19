@@ -1186,7 +1186,10 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
         { n: 'Construction Chemicals', v: 'chemicals' }, { n: 'OEM Manufacturing', v: 'oem' },
         { n: 'Mahalaxmi Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' },
         { n: 'Transport & Logistics', v: 'transport' }, { n: 'Infrastructure', v: 'infra' },
-        { n: 'Legacy & Ventures', v: 'legacy' }
+        { n: 'Legacy & Ventures', v: 'legacy' },
+        { n: 'Pioneer Sales', v: 'legacy#pioneer' }, { n: 'Int. Chemical Co.', v: 'legacy#international' },
+        { n: 'Chirag Warehousing', v: 'legacy#warehousing' }, { n: 'Chirag Mining', v: 'legacy#mining' },
+        { n: 'Venture Capital', v: 'legacy#vc' }
       ]
     },
     { n: 'Solutions', v: 'applications' },
@@ -1213,7 +1216,12 @@ const Navbar = ({ view, setView, siteMode = 'full_access' }) => {
         { n: 'Shiv Minerals', v: 'shiv', i: <Microscope size={16} /> },
         { n: 'Transport & Logistics', v: 'transport', i: <Truck size={16} /> },
         { n: 'Infrastructure', v: 'infra', i: <Building2 size={16} /> },
-        { n: 'Legacy & Ventures', v: 'legacy', i: <Briefcase size={16} /> }
+        { n: 'Legacy & Ventures', v: 'legacy', i: <Briefcase size={16} /> },
+        { n: 'Pioneer Sales', v: 'legacy#pioneer', i: <Briefcase size={16} /> },
+        { n: 'Int. Chemical Co.', v: 'legacy#international', i: <FlaskConical size={16} /> },
+        { n: 'Chirag Warehousing', v: 'legacy#warehousing', i: <Package size={16} /> },
+        { n: 'Chirag Mining', v: 'legacy#mining', i: <HardHat size={16} /> },
+        { n: 'Venture Capital', v: 'legacy#vc', i: <Globe size={16} /> }
       ].filter(item => siteMode === 'group_only' ? item.v !== 'chemicals' : true)
     },
     'Catalogue': {
@@ -2784,7 +2792,7 @@ const Footer = ({ setView, siteMode = 'full_access' }) => (
           <div>
             <h2 className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-4 md:mb-8">Divisions</h2>
             <ul className="space-y-3 text-emerald-100/70 text-sm font-medium">
-              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }, { n: 'Legacy & Ventures', v: 'legacy' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
+              {[{ n: 'Construction Chemicals', v: 'chemicals' }, { n: 'Millennium', v: 'millennium' }, { n: 'Shiv Minerals', v: 'shiv' }, { n: 'Transport', v: 'transport' }, { n: 'OEM', v: 'oem' }, { n: 'Infrastructure', v: 'infra' }, { n: 'Legacy & Ventures', v: 'legacy' }, { n: 'Pioneer Sales', v: 'legacy#pioneer' }, { n: 'Int. Chemical Co.', v: 'legacy#international' }, { n: 'Chirag Warehousing', v: 'legacy#warehousing' }, { n: 'Chirag Mining', v: 'legacy#mining' }, { n: 'Venture Capital', v: 'legacy#vc' }].filter(l => siteMode === 'group_only' ? l.v !== 'chemicals' : true).map(l => (
                 <li key={l.n}><button onClick={() => { setView(l.v); window.scrollTo(0, 0); }} className="hover:text-white hover:translate-x-1 transition-all block">{l.n}</button></li>
               ))}
             </ul>
@@ -2797,8 +2805,8 @@ const Footer = ({ setView, siteMode = 'full_access' }) => (
           <div className="space-y-3 text-emerald-100/70 text-sm font-medium">
             <div className="leading-relaxed">Ground Floor, 74/C, Kalpasutra Co-op Hsg Society,<br />Sarojini Road, Vile Parle West,<br />Mumbai - 400 056</div>
             <div className="space-y-1.5">
-              <a href="tel:+919820061842" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 98200 61842</a>
-              <a href="tel:+919821050005" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 98210 50005</a>
+              <a href="tel:+919820061842" className="text-white hover:text-amber-400 transition-colors block text-sm">Mahendra Shah: +91 98200 61842</a>
+              <a href="tel:+919821050005" className="text-white hover:text-amber-400 transition-colors block text-sm">Chirag Shah: +91 98210 50005</a>
               <a href="tel:+919152157578" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 91521 57578</a>
             </div>
             <div className="text-sm break-all">info@themahalaxmigroup.com</div>

@@ -3216,7 +3216,7 @@ const LegacyVenturesView = ({ setView }) => {
               <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Pioneering Production (1970s)</div>
               <h2 className="text-3xl md:text-5xl font-extrabold text-emerald-950 mb-6 tracking-tight">International Chemical Company</h2>
               <p className="text-gray-600 text-lg mb-6 leading-relaxed">Among the pioneers in producing Sodium Silicate at Sakinaka, Mumbai, during the 1970s.</p>
-              <p className="text-gray-600 text-lg mb-6 leading-relaxed">Over time, we expanded into the Ready-Mix Concrete (RMC) business in collaboration with Ashoka Buildcon Ltd., a partnership that thrived for over 12 years. Currently, the company operates a successful Joint Venture with ACC Ltd., further strengthening our footprint in India's growing infrastructure sector.</p>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">Over time, we expanded into the Ready-Mix Concrete (RMC) business in collaboration with Ashoka Buildcon Ltd., a partnership that thrived for over 12 years. Currently, the company operates a successful Joint Venture with ACC Ltd., operating an RMC plant in Mumbai, with strategic plans underway to add 2 more plants in the near future.</p>
             </AnimatedSection>
           </div>
         </div>

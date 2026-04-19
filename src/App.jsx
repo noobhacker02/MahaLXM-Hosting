@@ -328,11 +328,15 @@ const PROJECT_DATA = [
 
 const DIVISION_DATA = [
   { id: 'chemicals', view: 'chemicals', name: "Mahalaxmi Construction Chemicals", role: "Construction Chemicals", desc: "Greenseal waterproofing, tile adhesives, and repair mortars. UK Technology transfer.", icon: <FlaskConical size={32} /> },
-  { id: 'millennium', view: 'millennium', name: "Mahalaxmi Millennium", role: "Mining & Aggregates", desc: "Basalt mining, M-Sand, and aggregate supply for mega-projects (Bullet Train, Expressways).", icon: <HardHat size={32} /> },
-  { id: 'shiv', view: 'shiv', name: "Shiv Minerals", role: "Foundry & Glass Sand", desc: "Industrial silica sand processing (20,000 MT/month). Supplying Metso, Mahindra, Tata.", icon: <Microscope size={32} /> },
+  { id: 'millennium', view: 'millennium', name: "Mahalaxmi Millennium", role: "Mining & Aggregates", desc: "Basalt rock, Powder Grade, M-Sand, and aggregate supply for mega-projects (Bullet Train, Expressways).", icon: <HardHat size={32} /> },
+  { id: 'shiv', view: 'shiv', name: "Shiv Minerals", role: "Foundry & Glass Sand", desc: "Industrial silica sand processing (25,000 MT/month). Supplying Metso, Mahindra, Tata, AIA Industries.", icon: <Microscope size={32} /> },
   { id: 'oem', view: 'oem', name: "Contract Manufacturing", role: "OEM Services", desc: "Private label manufacturing facility for international construction chemical brands.", icon: <Factory size={32} /> },
   { id: 'logistics', view: 'transport', name: "Logistics & Fleet", role: "Transport", desc: "Proprietary fleet of 50+ tippers and bulk carriers ensuring on-time material delivery.", icon: <Truck size={32} /> },
   { id: 'infra', view: 'infra', name: "Infrastructure", role: "RMC & Infra", desc: "Ready-Mix Concrete (RMC) and infrastructure development solutions.", icon: <Building2 size={32} /> },
+  { id: 'pioneer', view: 'legacy#pioneer', name: "Pioneer Sales Agencies", role: "Chemical Trading", desc: "Est. 1942. Oldest trading firm in Masjid Bunder specializing in chemical trading.", icon: <Briefcase size={32} /> },
+  { id: 'warehousing', view: 'legacy#warehousing', name: "Chirag Warehousing", role: "Logistics & Storage", desc: "Trusted warehousing partner handling high-value requirements for MNCs.", icon: <Package size={32} /> },
+  { id: 'mining', view: 'legacy#mining', name: "Chirag Mining", role: "Mining Contracts", desc: "Executed major mining contracts across India including Konkan Railway development.", icon: <HardHat size={32} /> },
+  { id: 'vc', view: 'legacy#vc', name: "Venture Capital", role: "Strategic Projects", desc: "Strategic financial investments to support promising industry ventures and growth.", icon: <Globe size={32} /> },
 ];
 
 // ========================================
@@ -506,7 +510,7 @@ const ProductGallerySection = () => {
     ],
     [
       "/images/mining-operations.webp",
-      "/images/warehouse-interior.webp",
+      "/images/factory-floor.webp",
       "/images/product-catalogue-cover.webp",
       "/images/logistics-trucks.webp"
     ],
@@ -523,8 +527,8 @@ const ProductGallerySection = () => {
       "/images/basalt-mining.jpeg"
     ],
     [
-      "/images/warehousing-hub.webp",
-      "/images/warehousing-interior.jpeg",
+      "/images/factory-floor.webp",
+      "/images/silica-mining.jpg",
       "/images/chemical-company.jpg",
       "/images/chemical-plant-exterior.webp"
     ]
@@ -650,7 +654,7 @@ const MillenniumView = ({ setView }) => (
           </AnimatedSection>
           <AnimatedSection direction="right" delay={200}>
             <h3 className="text-2xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Strategic Mining Operations</h3>
-            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Operating from Phonda Ghat and Wada Palghar, we manage the entire value chain — selective basalt mining, advanced crushing, screening, and washing — to deliver aggregates that meet the exacting specifications of India's largest infrastructure contractors.</p>
+            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Operating from Phonda Ghat and Manor, Palghar, we manage the entire value chain — selective basalt mining, advanced crushing, screening, and washing — to deliver aggregates and M-sand that meet the exacting specifications of India's largest infrastructure contractors.</p>
             <p className="text-gray-600 mb-8 leading-relaxed">Our operations are designed for scale. With automated crushing lines processing 500+ tons daily, we ensure uninterrupted supply even during peak construction seasons. Every batch is tested for gradation, flakiness index, and impact value before dispatch.</p>
             <ul className="space-y-4">
               <li className="flex gap-3 items-start"><HardHat className="text-amber-500 shrink-0" /> <div><strong>Bullet Train (HSR) Supplier:</strong> Delivered 4 Lakh tons in 18 months.</div></li>
@@ -722,7 +726,7 @@ const MillenniumView = ({ setView }) => (
         <div className="grid md:grid-cols-3 gap-8">
           {[
             { y: "1998–2014", t: "Silica Sand Mining", d: "Operated silica sand mine under Maharashtra State Mining Corporation (MSMC) lease, building expertise in mineral extraction and processing." },
-            { y: "2015–2020", t: "Basalt & Aggregate Expansion", d: "Scaled operations to Phonda Ghat and Wada Palghar with automated crushing lines, serving Bullet Train HSR and national expressway projects." },
+            { y: "2015–2020", t: "Basalt & Aggregate Expansion", d: "Scaled operations to Phonda Ghat and Manor, Palghar with automated crushing lines, serving Bullet Train HSR and national expressway projects." },
             { y: "2020–Present", t: "Integrated Operations", d: "Full value chain from mining to transport. Partnered with Amazon India for warehousing, expanded to serve ACC, Megha Engineering, and Milan Infrastructure." }
           ].map((era, i) => (
             <AnimatedSection key={i} delay={i * 100}>
@@ -742,7 +746,7 @@ const MillenniumView = ({ setView }) => (
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <AnimatedSection direction="left">
-            <ParallaxImage src="/images/warehousing-hub.webp" alt="Warehousing operations" className="h-[350px] md:h-[400px] w-full shadow-2xl" />
+            <ParallaxImage src="/images/logistics-fleet.webp" alt="Logistics Network" className="h-[350px] md:h-[400px] w-full shadow-2xl" />
           </AnimatedSection>
           <AnimatedSection direction="right" delay={200}>
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Strategic Partnerships</div>
@@ -774,7 +778,7 @@ const ShivMineralsView = ({ setView }) => (
         <div className="inline-block px-4 py-1 border border-amber-500/50 rounded-full text-amber-500 text-[10px] font-bold uppercase tracking-widest mb-6">Silica & Sand</div>
         <h1 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4">Shiv Minerals</h1>
         <p className="text-xl text-emerald-100/90 mb-8 font-light">Industrial-Scale Silica & Sand Supply</p>
-        <p className="text-lg text-emerald-100/80 mb-12 max-w-2xl leading-relaxed font-medium">Shiv Minerals operates a dedicated silica mining setup in Bharuch with a 20,000-ton monthly capacity. We serve the Glass and Foundry industries, ensuring a constant, high-quality reservoir of raw material for our partners.</p>
+        <p className="text-lg text-emerald-100/80 mb-12 max-w-2xl leading-relaxed font-medium">Shiv Minerals operates a dedicated silica mining setup in Bharuch with a 25,000-ton monthly capacity. We serve the Glass and Foundry industries, ensuring a constant, high-quality reservoir of raw material for our partners.</p>
         <div className="flex flex-wrap gap-4">
           <Button variant="gold" onClick={() => setView('contact')}>Request Sample <ArrowRight size={18} /></Button>
           <Button variant="ghost" onClick={() => setView('divisions')}>All Divisions</Button>
@@ -791,14 +795,14 @@ const ShivMineralsView = ({ setView }) => (
               <div className="flex-1">
                 <h3 className="text-2xl font-bold text-emerald-950 mb-4 uppercase tracking-tight">Industrial-Scale Silica Processing</h3>
                 <p className="text-gray-700 mb-4 leading-relaxed">Shiv Minerals, established in 2017 at Jhagadia, is one of the largest silica sand manufacturers and processors in India. We specialise in silica sand for the foundry and glass industries.</p>
-                <p className="text-gray-700 mb-6 leading-relaxed">This industrial-scale operation ensures a constant, high-quality reservoir of raw material, mitigating supply chain risks and guaranteeing uninterrupted availability for our partners. Silica sand is sourced from Bharuch, while M-sand and construction sand are produced at our <strong>Manor factory, Palghar</strong> (Wada Palghar), maintaining clear structure and quality control.</p>
+                <p className="text-gray-700 mb-6 leading-relaxed">This industrial-scale operation ensures a constant, high-quality reservoir of raw material, mitigating supply chain risks and guaranteeing uninterrupted availability for our partners. Silica sand is sourced from Bharuch, while M-sand and aggregate are produced at our <strong>Manor factory, Palghar</strong>, maintaining clear structure and quality control.</p>
                 <p className="text-gray-700 font-bold mb-4">Key Clients:</p>
                 <div className="flex flex-wrap gap-3">
-                  {['Metso', 'Mahindra CIE', 'Tata Motors (Telco)', 'Sandvik', 'Canpack Glass', 'Haldyn Glass'].map(c => <span key={c} className="bg-white px-4 py-2 rounded-full border border-gray-200 text-xs font-bold uppercase tracking-wider shadow-sm">{c}</span>)}
+                  {['Metso', 'Mahindra CIE', 'Tata Motors (Telco)', 'Sandvik', 'Canpack Glass', 'Haldyn Glass', 'AIA Industries'].map(c => <span key={c} className="bg-white px-4 py-2 rounded-full border border-gray-200 text-xs font-bold uppercase tracking-wider shadow-sm">{c}</span>)}
                 </div>
               </div>
               <div className="w-40 h-40 bg-amber-500 rounded-full flex flex-col items-center justify-center text-white text-center shrink-0 shadow-xl border-8 border-white">
-                <div className="text-3xl font-black">20K</div>
+                <div className="text-3xl font-black">25K</div>
                 <div className="text-[10px] uppercase tracking-widest font-bold opacity-80">MT/Month</div>
               </div>
             </div>
@@ -809,11 +813,11 @@ const ShivMineralsView = ({ setView }) => (
           <div className="grid md:grid-cols-2 gap-8 mb-10">
             <div className="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
               <h4 className="text-lg font-bold text-emerald-950 uppercase mb-4">Foundry Sand</h4>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">Silica sand for the foundry industry, serving major clients such as Metso, Sandvik, Tata Motors (Telco), and Mahindra CIE. We specialise in consistent quality supply for casting applications.</p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Silica sand for the foundry industry, serving major clients such as Metso, Sandvik, Tata Motors (Telco), AIA Industries and Mahindra CIE. We specialise in consistent quality supply for casting applications.</p>
             </div>
             <div className="bg-emerald-50 rounded-2xl p-8 border border-emerald-100">
               <h4 className="text-lg font-bold text-emerald-950 uppercase mb-4">Glass Grade Sand</h4>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">Silica sand for the glass industry, supplying Canpack Glass and Haldyn Glass Limited. Our industrial-scale operation guarantees uninterrupted availability and consistent quality for glass manufacturing.</p>
+              <p className="text-gray-600 text-sm leading-relaxed mb-4">Silica sand tailored for the black glass and clear glass industries, supplying Canpack Glass and Haldyn Glass Limited. Our industrial-scale operation guarantees uninterrupted availability and consistent quality for glass manufacturing processes.</p>
             </div>
           </div>
         </AnimatedSection>
@@ -856,16 +860,16 @@ const ShivMineralsView = ({ setView }) => (
           </AnimatedSection>
           <AnimatedSection direction="right" delay={200}>
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Our Growth Journey</div>
-            <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">From 4,000 to 20,000 Tons</h3>
-            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Shiv Minerals started with a capacity of 4,000 tons/month. Through continuous expansion, we have grown four times to reach our current capacity of 20,000 tons/month today.</p>
-            <p className="text-gray-600 mb-8 leading-relaxed">We specialise in silica sand for the foundry and glass industries. Key clients include Metso, Mahindra, Tata Motors (Telco), Sandvik, and several reputed multinational corporations.</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">From 4,000 to 25,000 Tons</h3>
+            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Shiv Minerals started with a capacity of 4,000 tons/month. Through continuous expansion, we have grown over six times to reach our current capacity of 25,000 tons/month today.</p>
+            <p className="text-gray-600 mb-8 leading-relaxed">We specialise in silica sand for the foundry and black glass industries, as well as providing raw materials for construction chemicals. Key clients include Metso, Mahindra, Tata Motors (Telco), Sandvik, and several reputed multinational corporations.</p>
             <div className="grid grid-cols-3 gap-4">
               <div className="bg-white p-4 rounded-xl border border-gray-200 text-center">
                 <div className="text-2xl font-black text-emerald-950">4x</div>
                 <div className="text-[10px] text-amber-600 uppercase tracking-widest font-bold">Expansion</div>
               </div>
               <div className="bg-white p-4 rounded-xl border border-gray-200 text-center">
-                <div className="text-2xl font-black text-emerald-950">20K</div>
+                <div className="text-2xl font-black text-emerald-950">25K</div>
                 <div className="text-[10px] text-amber-600 uppercase tracking-widest font-bold">MT/Month</div>
               </div>
               <div className="bg-white p-4 rounded-xl border border-gray-200 text-center">
@@ -885,11 +889,11 @@ const ShivMineralsView = ({ setView }) => (
           <AnimatedSection direction="right" delay={200} className="order-2 lg:order-1">
             <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Mining Operations</div>
             <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Our Leadership & Mining Strength</h3>
-            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Shiv Minerals operates a dedicated silica mining setup in Bharuch with a 20,000-ton monthly capacity. Silica sand is sourced from Bharuch, while M-sand is produced at Wada Palghar, maintaining clear structure and quality control.</p>
-            <p className="text-gray-600 mb-8 leading-relaxed">We serve the Glass and Foundry industries, supplying major clients such as Mahindra CIE, Metso, Sandvik, Canpack Glass, and Haldyn Glass Limited. This industrial-scale operation mitigates supply chain risks and guarantees uninterrupted availability for our partners.</p>
+            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Shiv Minerals operates a dedicated silica mining setup in Bharuch with a 25,000-ton monthly capacity. Silica sand is sourced from Bharuch, while M-sand is produced at Manor, Palghar, maintaining clear structure and quality control.</p>
+            <p className="text-gray-600 mb-8 leading-relaxed">We serve the Black Glass and Foundry industries, and also act as a vital supplier of construction chemical raw materials, supplying major clients such as Mahindra CIE, Metso, Sandvik, Canpack Glass, and Haldyn Glass. This industrial-scale operation mitigates supply chain risks and guarantees uninterrupted availability for our partners.</p>
           </AnimatedSection>
           <AnimatedSection direction="left" className="order-1 lg:order-2">
-            <img src="/images/warehousing-interior.jpeg" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full" alt="Shiv Minerals mining operations" />
+            <img src="/images/silica-mining.jpg" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full" alt="Shiv Minerals mining operations" />
           </AnimatedSection>
         </div>
       </div>
@@ -1049,10 +1053,10 @@ const HeroSlider = ({ setView }) => {
       link: 'millennium'
     },
     {
-      img: "/images/warehouse-interior.webp",
+      img: "/images/chemicals-product-range.webp",
       category: "Foundry & Glass Sand",
       title: "Shiv Minerals",
-      sub: "Industrial silica sand processing (20,000 MT/month). Supplying Metso, Mahindra, Tata.",
+      sub: "Industrial silica sand processing (25,000 MT/month). Supplying Metso, Mahindra, Tata, AIA Industries.",
       link: 'shiv'
     }
   ];
@@ -1357,7 +1361,7 @@ const HomeView = ({ setView, siteMode = 'full_access' }) => (
               Controlling the supply chain from the ground up. Our dedicated mining leases for silica sand and basalt ensure highest purity raw materials.
             </p>
             <ul className="space-y-4 mb-8">
-              {['20,000 Tons Monthly Capacity', 'Wet-Processing Units', 'Zero-Waste Initiative'].map(item => (
+              {['25,000 Tons Monthly Capacity', 'Wet-Processing Units', 'Zero-Waste Initiative'].map(item => (
                 <li key={item} className="flex items-center gap-3 text-emerald-900 font-semibold"><CheckCircle2 size={18} className="text-amber-500" /> {item}</li>
               ))}
             </ul>
@@ -1508,7 +1512,7 @@ const AboutView = ({ setView }) => (
               { y: "1983", t: "Chirag Warehousing", d: "Exclusive warehousing partner for the American Embassy (1983-2002), handling high-value requirements with precision. Trusted logistics partner for MNCs." },
               { y: "1993", t: "Chirag Mining Pvt Ltd", d: "Executed mining partnerships with SESA Goa, Formento, and key contributions to Konkan Railway & Khed Station development." },
               { y: "1998", t: "Mahalaxmi Millennium", d: "Began mining Silica Sand at Phonda Ghat. Supplied 4 lakh tons to the Mumbai-Ahmedabad Bullet Train project. Partnered with Amazon India." },
-              { y: "2017", t: "Shiv Minerals", d: "Est. one of India's largest silica sand processing units at Jhagadia. Scaled from 4k to 20,000 MT/month. Supplying Metso, Mahindra, Tata Motors, Sandvik." },
+              { y: "2017", t: "Shiv Minerals", d: "Est. one of India's largest silica sand processing units at Jhagadia. Scaled from 4k to 25,000 MT/month. Supplying Metso, Mahindra, Tata Motors, Sandvik, AIA Industries." },
               { y: "2024", t: "Mahalaxmi Enterprises", d: "Entered transportation with a modern fleet of 10+ 16-tyre tippers. Contracts with Ultratech, L&T, JSW.", highlight: true },
               { y: "Future", t: "Maa Ambika LLP", d: "High-capacity RMC Plant at Mahol in partnership with Infra Market. Serving Central & South Mumbai infrastructure." }
             ].map((y, i) => (
@@ -3132,6 +3136,124 @@ const NavigationAdapter = ({ children }) => {
   return children({ view, setView });
 };
 
+const LegacyVenturesView = ({ setView }) => {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [hash]);
+
+  return (
+    <>
+      <PageHead title="Legacy & Strategic Ventures" description="A glance into the heritage and strategic expansions of the Mahalaxmi Group." />
+      <section className="bg-emerald-950 pt-40 md:pt-48 pb-24 md:pb-32 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-950/95 to-emerald-950/80"></div>
+        <div className="container mx-auto px-6 relative z-10">
+          <AnimatedSection className="max-w-4xl">
+            <div className="inline-block px-4 py-1 border border-amber-500/50 rounded-full text-amber-500 text-[10px] font-bold uppercase tracking-widest mb-6">Our Heritage</div>
+            <h1 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4">Legacy & Strategic Ventures</h1>
+            <p className="text-lg text-emerald-100/80 mb-12 max-w-2xl leading-relaxed font-medium">Tracing our roots back to 1942, we have built pivotal institutions in trading, logistics, mining, and strategic investments.</p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Pioneer Sales Agencies */}
+      <section id="pioneer" className="py-16 md:py-24 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection direction="left">
+              <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Established 1942</div>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-emerald-950 mb-6 tracking-tight">Pioneer Sales Agencies</h2>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">The oldest trading firm in Masjid Bunder, Mumbai, specializing in chemical trading.</p>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">We held exclusive selling rights for leading chemical companies, including Saurashtra Chemicals, Nirma Limited, and Borax Morarji Ltd. With decades of trust, this entity remains a foundational cornerstone of Mahalaxmi Group's legacy and network building.</p>
+              <div className="grid grid-cols-2 gap-4 mt-8">
+                <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100"><div className="text-2xl font-black text-emerald-950">1942</div><div className="text-[10px] uppercase text-amber-600 font-bold">Established</div></div>
+                <div className="bg-emerald-50 p-4 rounded-xl border border-emerald-100"><div className="text-2xl font-black text-emerald-950">Chemical</div><div className="text-[10px] uppercase text-amber-600 font-bold">Trading Hub</div></div>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={200}>
+              <img src="/images/chemicals-lab-testing.webp" alt="Pioneer Sales Agency" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full" />
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Chirag Warehousing */}
+      <section id="warehousing" className="py-16 md:py-24 bg-gray-50 border-b border-gray-200">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection direction="left" className="order-2 lg:order-1">
+              <img src="/images/factory-floor.webp" alt="Chirag Warehousing" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full" />
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={200} className="order-1 lg:order-2">
+              <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Logistics & Storage</div>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-emerald-950 mb-6 tracking-tight">Chirag Warehousing Co. Pvt. Ltd.</h2>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">A trusted name in logistics and storage solutions, catering to multiple MNCs across India.</p>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">Notably, from 1983 to 2002, we were the exclusive warehousing partner for the American Embassy in Mumbai, handling sensitive and high-value requirements with unparalleled precision and maximum confidentiality. This long-term association reflects our commitment to operational excellence.</p>
+              <div className="flex flex-wrap gap-3 mt-6">
+                <span className="bg-white px-4 py-2 rounded-full border border-gray-200 text-xs font-bold uppercase shadow-sm">Exclusive Embassy Partner (1983-2002)</span>
+                <span className="bg-white px-4 py-2 rounded-full border border-gray-200 text-xs font-bold uppercase shadow-sm">MNC Logistics</span>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Chirag Mining */}
+      <section id="mining" className="py-16 md:py-24 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection direction="left">
+              <div className="text-amber-600 font-bold uppercase tracking-widest text-xs mb-4">Mining Operations</div>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-emerald-950 mb-6 tracking-tight">Chirag Mining Pvt. Ltd.</h2>
+              <p className="text-gray-600 text-lg mb-6 leading-relaxed">Successfully executing numerous high-profile mining contracts across India, demonstrating deep expertise in mineral extraction and logistics.</p>
+              <ul className="space-y-4 text-gray-600 text-lg mb-8">
+                 <li><span className="text-amber-500 font-bold mr-2">✓</span>Mining partnerships with SESA Goa and Formento in Goa.</li>
+                 <li><span className="text-amber-500 font-bold mr-2">✓</span>Iron Ore mining projects at Chitradurga.</li>
+                 <li><span className="text-amber-500 font-bold mr-2">✓</span>Key contributions to Konkan Railway development.</li>
+                 <li><span className="text-amber-500 font-bold mr-2">✓</span>Undertook critical mining operations in Mahad and played a vital role in developing Khed Station (1993–1995).</li>
+              </ul>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={200}>
+              <img src="/images/mining-operations.webp" alt="Chirag Mining Operations" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full" />
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Venture Capital / Other Entities */}
+      <section id="vc" className="py-16 md:py-24 bg-emerald-950 text-white">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <AnimatedSection direction="left" className="order-2 lg:order-1">
+               <img src="/images/mahalaxmi-group-hq.webp" alt="Venture Capital Investments" className="rounded-2xl shadow-2xl h-[400px] object-cover w-full opacity-90 border-4 border-emerald-900/50" />
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={200} className="order-1 lg:order-2">
+              <div className="text-amber-500 font-bold uppercase tracking-widest text-xs mb-4">Strategic Finance</div>
+              <h2 className="text-3xl md:text-5xl font-extrabold mb-6 tracking-tight">Venture Capital & Other Entities</h2>
+              <p className="text-emerald-100/90 text-lg leading-relaxed mb-6">As venture capitalists, Mahalaxmi Group also undertakes strategic financial projects across diverse industries. Depending on the objective, market opportunity, and partnering expertise, we invest and support promising ventures that align with our group's growth vision.</p>
+              <div className="flex items-center gap-4 bg-white/10 p-6 rounded-xl border border-white/20">
+                <Globe className="text-amber-500 w-12 h-12 shrink-0" />
+                <p className="text-sm text-emerald-50">Expanding our legacy through careful, calculated, and high-impact strategic financial investments in industries of the future.</p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <ContactSection division="Mahalaxmi Group (HQ)" />
+    </>
+  );
+};
+
 export default function App() {
   const [activeProduct, setActiveProduct] = useState(null);
   const [activeProject, setActiveProject] = useState(null);
@@ -3160,12 +3282,14 @@ export default function App() {
     'products': '/products', 'product-detail': '/products/detail',
     'projects': '/projects', 'project-detail': '/projects/detail',
     'applications': '/solutions', 'downloads': '/downloads', 'contact': '/contact',
-    'privacy': '/privacy-policy', 'terms': '/terms-of-service'
+    'privacy': '/privacy-policy', 'terms': '/terms-of-service',
+    'legacy': '/divisions/legacy'
   };
 
   const setView = (viewName) => {
-    const path = viewToPath[viewName] || '/';
-    navigate(path);
+    const [baseView, hash] = viewName.split('#');
+    const path = viewToPath[baseView] || '/';
+    navigate(hash ? `${path}#${hash}` : path);
   };
 
   const pathToView = Object.fromEntries(Object.entries(viewToPath).map(([k, v]) => [v, k]));
@@ -3187,6 +3311,7 @@ export default function App() {
             <Route path="/divisions/chemicals" element={<ChemicalsView setView={setView} />} />
           )}
           <Route path="/divisions/millennium" element={<MillenniumView setView={setView} />} />
+          <Route path="/divisions/legacy" element={<LegacyVenturesView setView={setView} />} />
           <Route path="/divisions/shiv-minerals" element={<ShivMineralsView setView={setView} />} />
           <Route path="/divisions/oem" element={<OEMView setView={setView} />} />
           <Route path="/divisions/infrastructure" element={<InfraView setView={setView} />} />

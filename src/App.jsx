@@ -637,7 +637,7 @@ const MillenniumView = ({ setView }) => (
       <div className="container mx-auto px-6 relative z-10"><AnimatedSection className="max-w-4xl">
         <div className="inline-block px-4 py-1 border border-amber-500/50 rounded-full text-amber-500 text-[10px] font-bold uppercase tracking-widest mb-6">Mining & Aggregates</div>
         <h1 className="text-4xl md:text-7xl font-bold uppercase tracking-tighter mb-4">Mahalaxmi Millennium</h1>
-        <p className="text-xl text-emerald-100/90 mb-8 font-light">Powering Mega-Projects with Basalt & M-Sand</p>
+        <p className="text-xl text-emerald-100/90 mb-8 font-light">Powering Mega-Projects with Basalt Rock, Powder Grade & M-Sand</p>
         <p className="text-lg text-emerald-100/80 mb-12 max-w-2xl leading-relaxed font-medium">Strategic mining operations supplying high-grade aggregates for India's most critical infrastructure projects — from the Mumbai-Ahmedabad Bullet Train corridor to national expressways and metro rail systems.</p>
         <div className="flex flex-wrap gap-4">
           <Button variant="gold" onClick={() => setView('projects')}>View Projects <ArrowRight size={18} /></Button>
@@ -654,7 +654,7 @@ const MillenniumView = ({ setView }) => (
           </AnimatedSection>
           <AnimatedSection direction="right" delay={200}>
             <h3 className="text-2xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Strategic Mining Operations</h3>
-            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Operating from Phonda Ghat and Manor, Palghar, we manage the entire value chain — selective basalt mining, advanced crushing, screening, and washing — to deliver aggregates and M-sand that meet the exacting specifications of India's largest infrastructure contractors.</p>
+            <p className="text-gray-600 text-lg mb-6 leading-relaxed">Operating from Phonda Ghat and Manor, Palghar, we manage the entire value chain — selective basalt mining, advanced crushing, screening, and washing — to deliver Basalt Rock, Powder Grade, aggregates, and M-sand that meet the exacting specifications of India's largest infrastructure contractors.</p>
             <p className="text-gray-600 mb-8 leading-relaxed">Our operations are designed for scale. With automated crushing lines processing 500+ tons daily, we ensure uninterrupted supply even during peak construction seasons. Every batch is tested for gradation, flakiness index, and impact value before dispatch.</p>
             <ul className="space-y-4">
               <li className="flex gap-3 items-start"><HardHat className="text-amber-500 shrink-0" /> <div><strong>Bullet Train (HSR) Supplier:</strong> Delivered 4 Lakh tons in 18 months.</div></li>
@@ -687,10 +687,11 @@ const MillenniumView = ({ setView }) => (
             <h3 className="text-2xl md:text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-tight">Silica Sand & Aggregate Supply</h3>
             <p className="text-gray-600 text-lg mb-6 leading-relaxed">At our Phonda Ghat operations, we produce high-quality silica sand alongside our basalt aggregate portfolio. Our silica sand meets the stringent quality requirements of both the glass manufacturing and foundry casting industries.</p>
             <p className="text-gray-600 mb-8 leading-relaxed">The operation spans surface mining, washing, grading, and packaging — all conducted under strict environmental compliance. We maintain dedicated stockpiles for different grades, enabling rapid fulfillment of large-volume orders without compromising quality consistency.</p>
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {[
                 { n: "Basalt Aggregates", d: "10mm & 20mm", img: "/images/millennium-basalt-20mm.jpeg", badge: "Stone" },
                 { n: "Crush Sand", d: "For Concrete", img: "/images/millennium-crush-sand.jpeg", badge: "M-Sand" },
+                { n: "Powder Grade", d: "Fine Basalt Powder", img: "/images/basalt-mining.jpeg", badge: "Powder" },
                 { n: "Construction Sand", d: "15–20 AFS Wet", img: "/images/millennium-construction-sand.jpeg", badge: "Construction" },
                 { n: "Road Metal", d: "WBM & Base Course", img: "/images/basalt-mining.jpeg", badge: "Aggregate" }
               ].map((p, i) => (

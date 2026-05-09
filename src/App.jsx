@@ -1484,9 +1484,9 @@ const AboutView = ({ setView }) => (
         <SectionHeader title="Core Leadership" center={true} />
         <div className="grid md:grid-cols-3 gap-8">
           {[
-            { n: "Mahendra Shah", r: "Director", p: "+91 98200 61842" },
-            { n: "Chirag Shah", r: "Director", p: "+91 98210 50005" },
-            { n: "Dhhruv Shah", r: "Leadership Team", p: "+91 91521 57578" }
+            { n: "Mahendra Shah", r: "-------", p: "+91 98200 61842" },
+            { n: "Chirag Shah", r: "-------", p: "+91 98210 50005" },
+            { n: "Dhhruv Shah", r: "-------", p: "+91 91521 57578" }
           ].map((l, i) => (
             <AnimatedSection key={i} delay={i * 150}>
               <div className="bg-white p-10 rounded-2xl border border-gray-100 text-center card-hover group">
@@ -2815,7 +2815,7 @@ const Footer = ({ setView, siteMode = 'full_access' }) => (
             <div className="space-y-1.5">
               <a href="tel:+919820061842" className="text-white hover:text-amber-400 transition-colors block text-sm">Mahendra Shah: +91 98200 61842</a>
               <a href="tel:+919821050005" className="text-white hover:text-amber-400 transition-colors block text-sm">Chirag Shah: +91 98210 50005</a>
-              <a href="tel:+919152157578" className="text-white hover:text-amber-400 transition-colors block text-sm">+91 91521 57578</a>
+              <a href="tel:+919152157578" className="text-white hover:text-amber-400 transition-colors block text-sm">Dhhruv Shah: +91 91521 57578</a>
             </div>
             <div className="text-sm break-all">info@themahalaxmigroup.com</div>
           </div>
